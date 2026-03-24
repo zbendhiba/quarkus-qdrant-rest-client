@@ -10,7 +10,7 @@ import io.smallrye.config.WithDefault;
 
 @ConfigRoot(phase = RUN_TIME)
 @ConfigMapping(prefix = "quarkus.qdrant")
-public interface QdrantConfig {
+public interface QdrantClientConfig {
 
     /**
      * The hostname of the Qdrant server.

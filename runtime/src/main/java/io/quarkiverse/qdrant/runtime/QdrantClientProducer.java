@@ -4,8 +4,10 @@ import java.net.URI;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
@@ -13,12 +15,13 @@ import org.eclipse.microprofile.rest.client.RestClientBuilder;
 public class QdrantClientProducer {
 
     @Inject
-    QdrantConfig config;
+    QdrantClientConfig config;
 
     private QdrantRestApi client;
 
     @Produces
-    @ApplicationScoped
+    @Singleton
+    @Default
     public QdrantRestApi qdrantRestApi() {
         String scheme = config.useTls() ? "https" : "http";
         URI baseUri = URI.create(scheme + "://" + config.host() + ":" + config.port());
